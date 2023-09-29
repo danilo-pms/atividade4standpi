@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">Listagem de Reservas</h2>
+
+            <form method="GET" action="" class="mb-4">
+                <div class="input-group">
+                    <input type="text" name="nome" class="form-control" placeholder="Nome da empresa">
+
+                    <select name="quitado" class="form-control">
+                        <option value="">Selecione uma opção</option>
+                        <option value="quitado">Quitado</option>
+                        <option value="nao_quitado">Não Quitado</option>
+                    </select>
+
+                    <input type="number" name="valor" class="form-control" placeholder="Valor do Stand">
+
+                    <input type="date" name="data" class="form-control">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <ul class="list-group">
+                {% for reserva in reservas %}
+                <li class="list-group-item">
+                    <h4 class="mb-3">Nome da Empresa: {{ reserva.nome }}</h4>
+                    <p><strong>CNPJ:</strong> {{ reserva.cnpj }}</p>
+                    <p><strong>Reservado:</strong> {{ reserva.quitado }} | <strong>Valor da Reserva:</strong> <span>R$
+                        </span>{{reserva.stand.valor}} | <strong>Data da Reserva:</strong> {{ reserva.data }}</p>
+                    <hr>
+                    <div class="text-center">
+                        <a href="{% url 'detalhes' id=reserva.id %}" class="btn btn-info btn-sm mr-2">Detalhes</a>
+                        <a href="{% url 'excluir' id=reserva.id %}" class="btn btn-danger btn-sm mr-2">Excluir</a>
+                        <a href="{% url 'atualizar' id=reserva.id %}" class="btn btn-warning btn-sm">Atualizar</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="pagination">
+                <span class="step-links">
+                    <!-- Verifica se há uma página anterior disponível -->
+                    {% if reservas.has_previous %}
+                    <!-- Se houver uma página anterior, cria um link para ela -->
+                    <a href="?page={{ reservas.previous_page_number }}">anterior</a>
+                    {% endif %}
+
+                    <span class="current-page">
+                        <!-- Exibe a página atual e o número total de páginas -->
+                        Página {{ reservas.number }} de {{ reservas.paginator.num_pages }}
+                    </span>
+
+                    <!-- Verifica se há uma próxima página disponível -->
+                    {% if reservas.has_next %}
+                    <!-- Se houver uma próxima página, cria um link para ela -->
+                    <a href="?page={{ reservas.next_page_number }}">próxima</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

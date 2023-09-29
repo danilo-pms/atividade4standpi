@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Detalhes da Reserva
+{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-6 offset-md-3">
+        <h2>Detalhes da Reserva</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ reserva.nome }}</h5>
+                <p class="card-text">CNPJ: {{ reserva.cnpj }}</p>
+                <!-- Adicione mais informações aqui -->
+                <a href="{% url 'listar' %}" class="btn btn-primary">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
