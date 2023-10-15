@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário</title>
+    <!-- Adicione links para os estilos do Bootstrap (CSS) aqui -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+
+        .container {
+            max-width: 400px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_username">Nome de usuário:</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label for="id_email">Endereço de e-mail:</label>
+                {{ form.email }}
+            </div>
+            <div class="form-group">
+                <label for="id_password1">Senha:</label>
+                {{ form.password1 }}
+            </div>
+            <div class="form-group">
+                <label for="id_password2">Confirme a senha:</label>
+                {{ form.password2 }}
+            </div>
+            <input type="submit" class="btn btn-primary" value="Criar usuário">
+        </form>
+    </div>
+
+    <!-- Adicione scripts do Bootstrap (JS) aqui -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
